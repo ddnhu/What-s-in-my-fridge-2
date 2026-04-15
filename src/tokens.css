@@ -1,0 +1,33 @@
+:root {
+  /* Colours */
+  --color-bg: #0a0a0a;
+  --color-surface: #1a1a1a;
+  --color-surface-raised: #242424;
+  --color-primary: #ffffff;
+  --color-primary-bg: #ffffff;
+  --color-text: #ffffff;
+  --color-text-muted: #888888;
+  --color-border: #2e2e2e;
+
+  /* Spacing (8px base grid; --space-1 = 4px for tight cases) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  /* Typography (not grid-bound) */
+  --font-size-sm: 13px;
+  --font-size-body: 15px;
+  --font-size-heading: 20px;
+  --line-height-body: 1.5;
+}
