@@ -24,7 +24,19 @@ body {
 
 /* Camera screen */
 
+/* Full-screen background video — sits behind the overlay */
+.camera-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
 .camera-screen {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -62,6 +74,21 @@ body {
 .camera-video.active,
 .camera-still.active {
   display: block;
+}
+
+/* Fridge icon bounce — triggers when the icon variant changes */
+@keyframes fridge-bounce {
+  0%   { transform: scale(1);    }
+  18%  { transform: scale(1.32); }
+  40%  { transform: scale(0.86); }
+  62%  { transform: scale(1.14); }
+  78%  { transform: scale(0.95); }
+  90%  { transform: scale(1.04); }
+  100% { transform: scale(1);    }
+}
+
+.fridge-icon.bouncing {
+  animation: fridge-bounce 0.55s cubic-bezier(0.36, 0.07, 0.19, 0.97) forwards;
 }
 
 .capture-flash {
@@ -147,7 +174,7 @@ body {
 }
 
 .btn-library {
-  left: 20px;
+  right: 20px;
 }
 
 .fridge-badge {
@@ -168,7 +195,7 @@ body {
 }
 
 .btn-retake {
-  right: 20px;
+  left: 20px;
 }
 
 
