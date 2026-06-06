@@ -32,6 +32,12 @@ body {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none;
+}
+
+.camera-bg::-webkit-media-controls,
+.camera-video::-webkit-media-controls {
+  display: none !important;
 }
 
 .camera-screen {
@@ -48,6 +54,7 @@ body {
 
 .preview-area {
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   flex: 1;
   background-color: var(--color-surface);
@@ -69,6 +76,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .camera-video.active,
@@ -121,6 +130,7 @@ body {
 
 .controls {
   position: relative;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +184,7 @@ body {
 }
 
 .btn-library {
-  right: 20px;
+  left: 20px;
 }
 
 .fridge-badge {
@@ -194,13 +204,105 @@ body {
   pointer-events: none;
 }
 
+/* display: flex above overrides [hidden]'s display: none — this restores it */
+.fridge-badge[hidden] {
+  display: none;
+}
+
 .btn-retake {
-  left: 20px;
+  right: 20px;
 }
 
 
 .btn-retake:disabled {
   cursor: default;
+}
+
+/* Detection overlay */
+
+.detection-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  pointer-events: none;
+}
+
+.detection-frame {
+  width: 200px;
+  height: 200px;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  border-radius: 32px;
+  /* Mask reveals only the four corner windows (32px curve + 32px arm = 64px each side).
+     The full rounded border is drawn first, then clipped to just the corners. */
+  -webkit-mask:
+    linear-gradient(#000 0 0) 0    0    / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 100% 0    / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 0    100% / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 100% 100% / 52px 52px no-repeat;
+  mask:
+    linear-gradient(#000 0 0) 0    0    / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 100% 0    / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 0    100% / 52px 52px no-repeat,
+    linear-gradient(#000 0 0) 100% 100% / 52px 52px no-repeat;
+}
+
+.detection-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  pointer-events: auto;
+}
+
+.detection-label {
+  color: #ffffff;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+}
+
+.detection-quantity {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  background-color: rgba(0, 0, 0, 0.4);
+  padding: 2px 4px 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.qty-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qty-btn:active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.qty-value {
+  color: #ffffff;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
 }
 
 /* Gallery screen */
